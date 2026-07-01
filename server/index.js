@@ -679,10 +679,12 @@ function cleanObject(value = {}) {
   );
 }
 
-app.use(express.static(path.join(__dirname, '../dist')));
+const distPath = path.join(__dirname, '../dist');
 
-app.get('*', (_request, response) => {
-  response.sendFile(path.join(__dirname, '../dist/index.html'));
+app.use(express.static(distPath));
+
+app.get(/^\/(?!api\/|assets\/).*/, (_request, response) => {
+  response.sendFile(path.join(distPath, 'index.html'));
 });
 
 app.listen(port, '0.0.0.0', () => {
