@@ -26,7 +26,7 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
-const port = Number(process.env.PORT || 3001);
+const port = process.env.PORT || 8080;
 
 const allowedOrigins = [
   'http://127.0.0.1:5173',
@@ -697,7 +697,7 @@ app.get(/^\/(?!api\/|assets\/).*/, (req, res) => {
 });
 
 app.listen(port, '0.0.0.0', () => {
-  console.log(`店宣 AI server listening on http://127.0.0.1:${port}`);
+  console.log(`店宣 AI 服务监听 http://0.0.0.0:${port}`);
   console.log(`provider: ${provider}`);
   console.log(`mode: ${getMode()}`);
 });
