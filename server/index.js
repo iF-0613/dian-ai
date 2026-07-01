@@ -25,6 +25,7 @@ dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const distPath = path.resolve(__dirname, '../dist');
 const app = express();
 const port = Number(process.env.PORT || 3001);
 
@@ -679,7 +680,9 @@ function cleanObject(value = {}) {
   );
 }
 
-const distPath = path.join(__dirname, '../dist');
+app.use('/assets', express.static(path.join(distPath, 'assets'), {
+  fallthrough: false,
+}));
 
 app.use(express.static(distPath));
 
