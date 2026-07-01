@@ -25,7 +25,6 @@ dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const distPath = path.resolve(__dirname, '../dist');
 const app = express();
 const port = Number(process.env.PORT || 3001);
 
@@ -54,6 +53,11 @@ app.use(
   }),
 );
 app.use(express.json({ limit: '1mb' }));
+
+app.use((request, _response, next) => {
+  console.log('REQ', request.method, request.url);
+  next();
+});
 
 const provider = AI_PROVIDER === 'deepseek' ? 'deepseek' : 'openai';
 const imageProvider =
@@ -680,9 +684,9 @@ function cleanObject(value = {}) {
   );
 }
 
-app.use('/assets', express.static(path.join(distPath, 'assets'), {
-  fallthrough: false,
-}));
+const distPath = path.resolve(__dirname, '../dist');
+
+app.use('/assets', express.static(path.join(distPath, 'assets')));
 
 app.use(express.static(distPath));
 
