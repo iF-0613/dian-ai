@@ -686,12 +686,14 @@ function cleanObject(value = {}) {
 
 const distPath = path.resolve(__dirname, '../dist');
 
-app.use('/assets', express.static(path.join(distPath, 'assets')));
+app.get('/assets/:file', (req, res) => {
+  res.sendFile(path.join(distPath, 'assets', req.params.file));
+});
 
 app.use(express.static(distPath));
 
-app.get(/^\/(?!api\/|assets\/).*/, (_request, response) => {
-  response.sendFile(path.join(distPath, 'index.html'));
+app.get(/^\/(?!api\/|assets\/).*/, (req, res) => {
+  res.sendFile(path.join(distPath, 'index.html'));
 });
 
 app.listen(port, '0.0.0.0', () => {
