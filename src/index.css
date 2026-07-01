@@ -1,0 +1,140 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 16% 8%, rgba(209, 250, 229, 0.78), transparent 28rem),
+    radial-gradient(circle at 88% 12%, rgba(236, 253, 245, 0.9), transparent 22rem),
+    linear-gradient(135deg, #f7f8f6 0%, #f3f7f4 52%, #fbfaf7 100%);
+  color: #1c1917;
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes stat-shine {
+  0% {
+    filter: saturate(0.95) brightness(0.96);
+  }
+  50% {
+    filter: saturate(1.18) brightness(1.08);
+  }
+  100% {
+    filter: saturate(0.95) brightness(0.96);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes soft-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.985) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes chat-message {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@layer components {
+  .field-label {
+    @apply text-[13px] font-semibold text-stone-600;
+  }
+
+  .field-control {
+    @apply mt-2 w-full rounded-2xl border border-stone-200 bg-white px-4 py-3 text-[15px] text-stone-900 outline-none transition duration-200 ease-out placeholder:text-stone-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100;
+  }
+
+  .icon-button {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl px-4 py-2.5 text-[15px] font-semibold transition duration-200 ease-out focus:outline-none focus:ring-4;
+  }
+
+  .animate-page-in {
+    animation: page-in 520ms ease-out both;
+  }
+
+  .animate-stat-shine {
+    animation: stat-shine 2.4s ease-in-out infinite;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 180ms ease-out both;
+  }
+
+  .animate-toast-in {
+    animation: toast-in 200ms ease-out both;
+  }
+
+  .animate-soft-pop {
+    animation: soft-pop 220ms ease-out both;
+  }
+
+  .animate-chat-message {
+    animation: chat-message 220ms ease-out both;
+  }
+}
