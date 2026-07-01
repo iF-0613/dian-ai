@@ -133,6 +133,25 @@ CORS_ORIGINS=https://dianxuan-ai.netlify.app,http://localhost:5173,http://127.0.
 - Render 可能会自动注入端口，如果平台提示不要手动设置 `PORT`，可以删除 `PORT=3001`。
 - 修改环境变量后，需要重新部署或重启 Render 服务。
 
+## 3.1 Railway 单服务部署
+
+如果使用 Railway 同时托管后端 API 和前端静态文件，后端会自动读取 `dist` 目录并返回前端首页。
+
+Railway 配置：
+
+```text
+Build Command: npm install && npm run build
+Start Command: npm start
+```
+
+部署后直接访问 Railway 域名：
+
+```text
+https://你的项目.up.railway.app
+```
+
+如果首页正常显示，说明 Express 已经正确托管前端 `dist`。如果仍然出现 `Cannot GET /`，请确认 Railway 的 Build Command 一定包含 `npm run build`。
+
 ## 4. 前端环境变量清单
 
 Netlify 只需要：

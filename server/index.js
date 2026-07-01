@@ -2,6 +2,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
 import OpenAI from 'openai';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import {
   AI_MODELS,
   AI_PROVIDER,
@@ -21,6 +23,8 @@ import {
 
 dotenv.config();
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const app = express();
 const port = Number(process.env.PORT || 3001);
 
@@ -675,7 +679,13 @@ function cleanObject(value = {}) {
   );
 }
 
-app.listen(port, () => {
+app.use(express.static(path.join(__dirname, '../dist')));
+
+app.get('*', (_request, response) => {
+  response.sendFile(path.join(__dirname, '../dist/index.html'));
+});
+
+app.listen(port, '0.0.0.0', () => {
   console.log(`店宣 AI server listening on http://127.0.0.1:${port}`);
   console.log(`provider: ${provider}`);
   console.log(`mode: ${getMode()}`);
